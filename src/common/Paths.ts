@@ -8,8 +8,15 @@ export default {
   Users: {
     Base: '/users',
     Get: '/all',
-    Add: '/add',
+    Add: '/register',
     Update: '/update',
+    ChangePassword:'/change-password',
     Delete: '/delete/:id',
   },
+  Auth :{
+    Base:'/',
+    Login:'/login',
+    ValidRefreshToken:'/validate-refresh-token',
+    ValidJWT:'/dummy-data'
+  }
 } as const;
