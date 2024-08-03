@@ -1,53 +1,31 @@
-import HttpStatusCodes from '@src/common/HttpStatusCodes';
 
-import UserService from '@src/services/UserService';
-import { IUser } from '@src/models/User';
-import { IReq, IRes } from './types/express/misc';
+import { Router } from 'express';
+import Paths from '../common/Paths';
+import UserController from '@src/controllers/UserController';
 
+const router = Router()
+// Get all users
+router.get(
+  Paths.Users.Get,
+  UserController.getAll,
+);
 
-// **** Functions **** //
+// Add one user
+router.post(
+  Paths.Users.Add,
+  UserController.add,
+);
 
-/**
- * Get all users.
- */
-async function getAll(_: IReq, res: IRes) {
-  const users = await UserService.getAll();
-  return res.status(HttpStatusCodes.OK).json({ users });
-}
+// Update one user
+router.put(
+  Paths.Users.Update,
+  UserController.update,
+);
 
-/**
- * Add one user.
- */
-async function add(req: IReq<{user: IUser}>, res: IRes) {
-  const { user } = req.body;
-  await UserService.addOne(user);
-  return res.status(HttpStatusCodes.CREATED).end();
-}
+// Delete one user
+router.delete(
+  Paths.Users.Delete,
+  UserController.delete,
+);
 
-/**
- * Update one user.
- */
-async function update(req: IReq<{user: IUser}>, res: IRes) {
-  const { user } = req.body;
-  await UserService.updateOne(user);
-  return res.status(HttpStatusCodes.OK).end();
-}
-
-/**
- * Delete one user.
- */
-async function delete_(req: IReq, res: IRes) {
-  const id = +req.params.id;
-  await UserService.delete(id);
-  return res.status(HttpStatusCodes.OK).end();
-}
-
-
-// **** Export default **** //
-
-export default {
-  getAll,
-  add,
-  update,
-  delete: delete_,
-} as const;
+export default router
