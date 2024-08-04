@@ -1,19 +1,17 @@
+import EnvVars from '@src/common/EnvVars';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
-const JWT_EXPIRATION = '2m';
-const REFRESH_TOKEN_EXPIRATION = '5m';
-
+const JWT_SECRET = EnvVars.Jwt.Secret
 export interface TokenPayload {
   userId: string;
 }
 
 export const generateToken = (payload: TokenPayload): string => {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRATION });
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: EnvVars.Jwt.Exp });
 };
 
 export const generateRefreshToken = (payload: TokenPayload): string => {
-  return jwt.sign(payload, JWT_SECRET, { expiresIn: REFRESH_TOKEN_EXPIRATION });
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: EnvVars.Jwt.ReFreshExp });
 };
 
 export const verifyToken = (token: string): TokenPayload | null => {
