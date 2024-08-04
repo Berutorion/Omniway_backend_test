@@ -20,7 +20,7 @@
 
 1. Clone the repository:
    ```
-   git@github.com:Berutorion/Omniway_backend_test.git
+   git clone https://github.com/Berutorion/Omniway_backend_test.git
    cd Omniway_backend_test
    ```
 
