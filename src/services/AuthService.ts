@@ -21,6 +21,7 @@ async function Login(username:string, password:string) {
       throw new RouteError(HttpStatusCodes.NO_CONTENT,"UserName or Password is wrong.")
     }
 
+    
     const token = generateToken({userId:user.id})
     const refreshsToken = generateRefreshToken({userId:user.id})
 

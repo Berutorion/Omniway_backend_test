@@ -2,30 +2,12 @@
 import { Router } from 'express';
 import Paths from '../common/Paths';
 import UserController from '@src/controllers/UserController';
+import { authMiddleware } from '@src/middlewares/authmiddleware';
 
 const router = Router()
-// Get all users
-router.get(
-  Paths.Users.Get,
-  UserController.getAll,
-);
 
-// Add one user
-router.post(
-  Paths.Users.Add,
-  UserController.add,
-);
+// chanage password 
 
-// Update one user
-router.put(
-  Paths.Users.Update,
-  UserController.update,
-);
-
-// Delete one user
-router.delete(
-  Paths.Users.Delete,
-  UserController.delete,
-);
+router.post(Paths.Users.ChangePassword, authMiddleware, UserController.chanagePassword)
 
 export default router

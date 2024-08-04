@@ -50,7 +50,7 @@ async function add(user: IUser): Promise<void> {
  * Update a user.
  */
 async function update(user: IUser): Promise<void> {
-  await User.findByIdAndUpdate(user.id, user)
+    await User.findByIdAndUpdate(user._id, user)
 }
 
 /**

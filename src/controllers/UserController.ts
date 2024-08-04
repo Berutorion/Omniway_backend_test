@@ -5,6 +5,13 @@ import { IUser } from '@src/models/User';
 import { IReq, IRes } from './types/express/misc';
 
 
+interface IPasswordRep {
+  user:IUser
+  oldPassword:string,
+  newPassword: string
+}
+
+
 // **** Functions **** //
 
 /**
@@ -43,6 +50,21 @@ async function delete_(req: IReq, res: IRes) {
 }
 
 
+// change password 
+
+async function chanagePassword(req:IReq<IPasswordRep> , res: IRes) {
+  try {
+    const {oldPassword, newPassword, user } = req.body
+    await UserService.changePassword(oldPassword,newPassword,user.id)
+
+    res.status(200).json({message:"Change success."})
+  } catch (error) {
+    throw error
+  }
+ 
+  
+}
+
 // **** Export default **** //
 
 export default {
@@ -50,4 +72,5 @@ export default {
   add,
   update,
   delete: delete_,
+  chanagePassword
 } as const;
