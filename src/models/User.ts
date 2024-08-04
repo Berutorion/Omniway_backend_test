@@ -1,4 +1,4 @@
-import { hashPassword } from '@src/util/PwdUnit';
+import { hashPassword } from '@src/util/PwdUtil';
 import mongoose, { Document, Schema } from 'mongoose';
 
 // type

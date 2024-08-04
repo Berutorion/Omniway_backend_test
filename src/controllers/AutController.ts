@@ -16,11 +16,8 @@ interface ILoginReq {
 async function Login(req: IReq<ILoginReq>, res: IRes) {
     try {
         const {username, password} = req.body
-        await AuthService.Login(username,password)
-        return res.status(HttpStatusCodes.OK).json({
-            JWT:"",
-            refreshsToken : ""
-        })
+        const tokens = await AuthService.Login(username,password)
+        return res.status(HttpStatusCodes.OK).json(tokens)
     } catch (error) {
        throw error
     }
