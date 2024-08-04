@@ -93,7 +93,7 @@ async function _delete(id: string): Promise<void> {
 async function changePassword (oldPassword: string, newPassword:string, userId:string){
   const user = await UserRepo.getOneById(userId)
   if(!user) throw new RouteError(HttpStatusCodes.NOT_FOUND, USER_NOT_FOUND_ERR)
-  const isMatch = comparePassword(oldPassword, user?.password)
+  const isMatch = await comparePassword(oldPassword, user?.password)
   if(!isMatch) throw new RouteError(HttpStatusCodes.BAD_REQUEST, "Please enter the current password correctly")
   await UserRepo.update({...user.toJSON(), password:newPassword})
 }
