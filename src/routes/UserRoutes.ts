@@ -3,12 +3,13 @@ import { Router } from 'express';
 import Paths from '../common/Paths';
 import UserController from '@src/controllers/UserController';
 import { authMiddleware } from '@src/middlewares/authmiddleware';
+import uploadAvatar from '@src/middlewares/uploadAvatar';
 
 const router = Router()
 
 // register user
 
-router.post(Paths.Users.Add, UserController.add)
+router.post(Paths.Users.Add,uploadAvatar, UserController.add)
 
 // chanage password 
 
