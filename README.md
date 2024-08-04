@@ -1,43 +1,95 @@
-## About
-
-This project was created with [express-generator-typescript](https://github.com/seanpmaxwell/express-generator-typescript).
+# Backend Development Skill Assessment Project
 
 
-## Available Scripts
+## Features
 
-### `npm run dev`
+- User Registration
+- User Login with JWT
+- Change Password (authenticated)
+- Token Expiration Handling
+- Refresh Token Validation
+- Dummy Data Endpoint (authenticated)
 
-Run the server in development mode.
+## Prerequisites
 
-### `npm test`
+- Node.js (>=8.10.0)
+- [MongoDB] (>= 5.0.0)
+- npm or yarn
 
-Run all unit-tests with hot-reloading.
+## Setup
 
-### `npm test -- --testFile="name of test file" (i.e. --testFile=Users).`
+1. Clone the repository:
+   ```
+   git clone https://github.com/your-username/your-repo-name.git
+   cd your-repo-name
+   ```
 
-Run a single unit-test.
+2. Install dependencies:
+   ```
+   npm install
+   ```
 
-### `npm run test:no-reloading`
+3. Set up your environment variables:
+   - The project uses separate environment files for development and production.
+   - These files are located in the `env/` directory.
+   - Make sure to review and update both `development.env` and `production.env` files with your specific configurations.
 
-Run all unit-tests without hot-reloading.
+## Environment Variables
 
-### `npm run lint`
+The project uses two environment files:
 
-Check for linting errors.
+1. `env/development.env` for development environment
+2. `env/production.env` for production environment
 
-### `npm run build`
+Each file should contain the following variables:
 
-Build the project for production.
+```
+NODE_ENV=[development/production]
 
-### `npm start`
+# Server
+PORT=3000
+HOST=localhost
 
-Run the production build (Must be built first).
+# Database
+DataBase_URL=your_database_connection_string
 
-### `npm start -- --env="name of env file" (default is production).`
+# JWT
+JWT_SECRET=your_jwt_secret_key
+JWT_EXPIRATION=2m
+REFRESH_TOKEN_EXPIRATION=5m
+```
 
-Run production build with a different env file.
+Make sure to replace the placeholder values with your actual configuration in both files.
+
+## Running the Application
+
+### Development Mode
+
+To run the application in development mode with hot reloading:
+
+```
+npm run dev
+```
+
+This will use the configurations from `env/development.env`.
+
+### Production Mode
+
+To build and run the application in production mode:
+
+```
+npm run build
+npm start
+```
+
+This will use the configurations from `env/production.env`.
+
+## API Endpoints
+
+- POST `/register` - Register a new user
+- POST `/login` - User login
+- POST `/change-password` - Change user password (requires authentication)
+- POST `/validate-refresh-token` - Validate refresh token and issue new JWT
+- GET `/dummy-data` - Get dummy data (requires authentication)
 
 
-## Additional Notes
-
-- If `npm run dev` gives you issues with bcrypt on MacOS you may need to run: `npm rebuild bcrypt --build-from-source`. 
