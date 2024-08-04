@@ -5,7 +5,7 @@ import HttpStatusCodes from '@src/common/HttpStatusCodes';
 
 import UserService from './UserService';
 import { comparePassword } from '@src/util/PwdUtil';
-import { generateRefreshToken, generateToken } from '@src/util/tokenUtil';
+import { generateRefreshToken, generateToken, verifyRefreshToken } from '@src/util/tokenUtil';
 
 
 
@@ -31,6 +31,22 @@ async function Login(username:string, password:string) {
     }
 }
 
+async function validateRefreshToken (refreshToken:string) {
+  try {
+    // verify and decode token 
+    const decode = verifyRefreshToken(refreshToken)
+
+    // check user is exist 
+    await UserService.getOneById(decode.userId)
+
+    // generate new JWT
+    return generateToken({userId: decode.userId})
+  } catch (error) {
+    throw error
+  }
+}
+
 export default {
-    Login
+    Login,
+    validateRefreshToken
 } as const

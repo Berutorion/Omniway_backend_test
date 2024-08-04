@@ -44,7 +44,7 @@ async function update(req: IReq<{user: IUser}>, res: IRes) {
  * Delete one user.
  */
 async function delete_(req: IReq, res: IRes) {
-  const id = +req.params.id;
+  const id = req.params.id;
   await UserService.delete(id);
   return res.status(HttpStatusCodes.OK).end();
 }

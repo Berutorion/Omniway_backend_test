@@ -1,4 +1,3 @@
-import { hashPassword } from '@src/util/PwdUtil';
 import mongoose, { Document, Schema } from 'mongoose';
 
 // type
@@ -17,15 +16,6 @@ const UserSchema: Schema<IUser> = new Schema({
   avatar: {type : String, required: true , default: ''}
 });
 
-// hash password before saving
-UserSchema.pre('save', async function (next) {
-  const user = this
-  if (!user.isModified('password')) {
-    return next();
-  }
-  user.password = await hashPassword(user.password);
-  next();
-});
 
 const User = mongoose.model<IUser>('User', UserSchema);
 export default User;

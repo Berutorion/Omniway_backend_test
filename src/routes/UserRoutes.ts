@@ -6,6 +6,10 @@ import { authMiddleware } from '@src/middlewares/authmiddleware';
 
 const router = Router()
 
+// register user
+
+router.post(Paths.Users.Add, UserController.add)
+
 // chanage password 
 
 router.post(Paths.Users.ChangePassword, authMiddleware, UserController.chanagePassword)

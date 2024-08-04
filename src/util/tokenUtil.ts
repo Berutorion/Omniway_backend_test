@@ -23,3 +23,11 @@ export const verifyToken = (token: string): TokenPayload | null => {
     return null;
   }
 };
+
+export const verifyRefreshToken = (token: string):TokenPayload => {
+  try {
+    return jwt.verify(token, JWT_SECRET) as TokenPayload;
+  } catch (error) {
+    throw new Error('Invalid refresh token');
+  }
+};
