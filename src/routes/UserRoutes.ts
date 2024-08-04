@@ -14,4 +14,8 @@ router.post(Paths.Users.Add, UserController.add)
 
 router.post(Paths.Users.ChangePassword, authMiddleware, UserController.chanagePassword)
 
+// valid JWt 
+
+router.get(Paths.Users.ValidJWT, authMiddleware, UserController.getAll)
+
 export default router

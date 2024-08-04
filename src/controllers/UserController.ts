@@ -17,9 +17,9 @@ interface IPasswordRep {
 /**
  * Get all users.
  */
-async function getAll(_: IReq, res: IRes) {
+async function getAll(_: IReq<{user: IUser}>, res: IRes) {
   const users = await UserService.getAll();
-  return res.status(HttpStatusCodes.OK).json({ users });
+   res.status(HttpStatusCodes.OK).json({ users });
 }
 
 /**
