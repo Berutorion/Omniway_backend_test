@@ -20,8 +20,8 @@
 
 1. Clone the repository:
    ```
-   git clone https://github.com/your-username/your-repo-name.git
-   cd your-repo-name
+   git@github.com:Berutorion/Omniway_backend_test.git
+   cd Omniway_backend_test
    ```
 
 2. Install dependencies:
