@@ -20,6 +20,22 @@ function getAll(): Promise<IUser[]> {
 }
 
 /**
+ * Get one users.
+ */
+async function  getOne(username:string): Promise<IUser>  {
+  const user = await UserRepo.getOne(username)
+  if(user === null){
+    throw new RouteError(
+      HttpStatusCodes.NO_CONTENT,
+      USER_NOT_FOUND_ERR
+    )
+  }
+
+  return user
+
+}
+
+/**
  * Add one user.
  */
 function addOne(user: IUser): Promise<void> {
@@ -61,6 +77,7 @@ async function _delete(id: number): Promise<void> {
 
 export default {
   getAll,
+  getOne,
   addOne,
   updateOne,
   delete: _delete,
