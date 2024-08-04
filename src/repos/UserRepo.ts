@@ -13,6 +13,16 @@ async function getOne(username: string): Promise<IUser | null> {
 }
 
 /**
+ * Get one user by id.
+ */
+async function getOneById(id: string): Promise<IUser | null> {
+  const user  = await User.findById(id)
+  if(user) return user
+ 
+  return null
+ }
+
+/**
  * See if a user with the given id exists.
  */
 async function persists(id: number): Promise<boolean> {
@@ -55,6 +65,7 @@ async function delete_(id: number): Promise<void> {
 
 export default {
   getOne,
+  getOneById,
   persists,
   getAll,
   add,

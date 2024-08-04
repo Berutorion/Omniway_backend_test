@@ -32,8 +32,24 @@ async function  getOne(username:string): Promise<IUser>  {
   }
 
   return user
+}
+
+/**
+ * Get one users by id.
+ */
+async function  getOneById(id:string): Promise<IUser>  {
+  const user = await UserRepo.getOneById(id)
+  if(user === null){
+    throw new RouteError(
+      HttpStatusCodes.NO_CONTENT,
+      USER_NOT_FOUND_ERR
+    )
+  }
+
+  return user
 
 }
+
 
 /**
  * Add one user.
@@ -78,6 +94,7 @@ async function _delete(id: number): Promise<void> {
 export default {
   getAll,
   getOne,
+  getOneById,
   addOne,
   updateOne,
   delete: _delete,
